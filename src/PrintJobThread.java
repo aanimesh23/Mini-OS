@@ -17,7 +17,7 @@ public class PrintJobThread extends Thread
 		int printID = Main.printer_allocation.request();
 		Printer printer = Main.printers[printID];
 
-		System.out.println("Printing "+ file.toString() + " to printer number "+printID);
+		System.out.println("Printing "+ file.toString() + " to printer number "+(printID+1));
 
 		for(int i = 0; i < info.fileLength; i++)
 		{
@@ -45,7 +45,7 @@ public class PrintJobThread extends Thread
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Printed "+ file.toString() + " to printer number "+printID);
+		System.out.println("Printed "+ file.toString() + " to printer number "+(printID+1));
 		Main.printer_allocation.release(printID);
 	}
 }

@@ -2,14 +2,17 @@ import java.util.*;
 
 class DirectoryManager
 {
-	Hashtable<StringBuffer, FileInfo> T = new Hashtable<StringBuffer, FileInfo>();
+	Hashtable<String, FileInfo> T = new Hashtable<String, FileInfo>();
 	void enter(StringBuffer key, FileInfo file)
 	{
-		T.put(key, file);
+		String m = key.toString();
+		T.put(m, file);
+
 	}
 	FileInfo lookup(StringBuffer key)
 	{
-		return T.get(key);
+		String m = key.toString();
+		return T.get(m);
 	}
 	void print()
 	{

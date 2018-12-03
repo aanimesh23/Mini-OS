@@ -37,7 +37,6 @@ public class UserThread extends Thread
 				}
 				else if(line.toString().startsWith(".print"))
 				{
-					System.out.println(line.substring(7));
 					PrintJobThread pjt = new PrintJobThread(line.substring(7));
 					pjt.start();
 				}
@@ -46,7 +45,6 @@ public class UserThread extends Thread
 					System.out.println("Saved file to "+fileName.toString()+" to disk "+(disk_number + 1));
 					fileName = null;
 					Main.disk_allocation.release(disk_number);
-					Main.disk_manager.print();
 				}
 				else if(fileName != null)
 				{
