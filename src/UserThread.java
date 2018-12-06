@@ -1,4 +1,5 @@
 import java.io.*;
+import javafx.scene.paint.Color;
 
 public class UserThread extends Thread
 {
@@ -31,19 +32,25 @@ public class UserThread extends Thread
 				
 				if(line.toString().startsWith(".save"))
 				{
+					Main.u[id-1].setFill(Color.RED);
 					fileName = new StringBuffer(line.substring(6));
 					disk_number = Main.disk_allocation.request();
 					System.out.println("Saving file "+fileName.toString()+" to disk "+(disk_number + 1));
+					Main.d[disk_number].setFill(Color.RED);
+					Main.data[id-1][disk_number].setStroke(Color.BLACK);
 				}
 				else if(line.toString().startsWith(".print"))
 				{
-					PrintJobThread pjt = new PrintJobThread(line.substring(7));
+					PrintJobThread pjt = new PrintJobThread(line.substring(7), (id-1) );
 					pjt.start();
 				}
 				else if(line.toString().startsWith(".end"))
 				{
+					Main.u[id-1].setFill(Color.GREEN);
 					System.out.println("Saved file to "+fileName.toString()+" to disk "+(disk_number + 1));
 					fileName = null;
+					Main.d[disk_number].setFill(Color.GREEN);
+					Main.data[id-1][disk_number].setStroke(Color.WHITE);
 					Main.disk_allocation.release(disk_number);
 				}
 				else if(fileName != null)
@@ -67,7 +74,7 @@ public class UserThread extends Thread
                         info.fileLength = info.fileLength+1;
                         disk.write(nextFreeSector,line);
                         System.out.println("Writing " + line);
-                        Thread.sleep(200 );
+                        Thread.sleep(200);
                     }
 				}
 				
